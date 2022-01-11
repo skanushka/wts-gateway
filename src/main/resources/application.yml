@@ -1,0 +1,22 @@
+server:
+  port: 9000
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: service1
+          uri: http://localhost:8080/
+          predicates:
+           - Path=/product/**
+        - id: service2
+          uri: http://localhost:8081/
+          predicates:
+           - Path=/cart/**
+  main:
+    allow-bean-definition-overriding: true
+
+logging.level:
+  org.springframework.cloud.gateway: DEBUG
+  org.springframework.security: DEBUG
+  org.springframework.web.reactive.function.client: TRACE
